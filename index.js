@@ -26,6 +26,13 @@ function createTimeOutEvent(dateStamp){
     return this
 }
 
+function hoursWorkedOnDate(record, date){
+    let starting = record.timeInEvents.find(e => return e.date == date)
+    let ending = record.timeOutEvents.find(e => return e.date == date)
+    let hours = (ending.hour - starting.hour) / 100
+    return hours 
+
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
