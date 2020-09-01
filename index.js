@@ -1,5 +1,32 @@
 /* Your Code Here */
 
+function createEmployeeRecord(arr){
+    const record = {
+        firstName: arr[0],
+        familyName: arr[1],
+        title: arr[2],
+        payPerHour: arr[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
+    return record
+}
+
+function createEmployeeRecords(arrayz){
+    return arrayz.map(arr => createEmployeeRecord(arr))
+}
+
+function createTimeInEvent(dateStamp){
+    this.timeInEvents.push( {type: 'TimeIn', date: dateStamp.slice(0, 10), hour: parseInt(dateStamp.slice(-5))})
+    return this
+}
+
+function createTimeOutEvent(dateStamp){
+    this.timeOutEvents.push({type: "TimeOut", date: dateStamp.slice(0, 10), hour: parseInt(dateStamp.slice(-5))})
+    return this
+}
+
+
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
@@ -19,4 +46,15 @@ let allWagesFor = function () {
     }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
     return payable
+}
+
+
+function calculatePayroll(records){
+    let sum = 0
+    records.map(record => sum += allWagesFor(record))
+    return sum
+}
+
+function findEmployeeByFirstName(firstName){
+    return self.find(record => record.firstName === firstName)
 }
