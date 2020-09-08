@@ -9,6 +9,45 @@
  for you to use if you need it!
  */
 
+// let createEmployeeRecord = function(array) {
+//     this.firstName = array[0]
+//     this.familyName = array[1]
+//     this.title = array[2]
+//     this.payPerHour = array[3]
+//     this.timeInEvents = []
+//     this.timeOutEvents = []
+// }
+
+ function createEmployeeRecord(array) {
+    let newEmployee = {
+    firstName: array[0],
+    familyName: array[1],
+    title: array[2],
+    payPerHour: array[3],
+    timeInEvents: [],
+    timeOutEvents: []
+    }
+    return newEmployee
+}
+
+function createEmployeeRecords(sourcearray) {
+    return sourcearray.map(record => {
+        return createEmployeeRecord(record)
+    })
+}
+
+function hoursWorkedOnDate(employee, date) {
+    const timeIn = (employee.timeInEvents.find(element => element.date == date)).hour
+    const timeOut = (employee.timeOutEvents.find(element => element.date == date)).hour
+    const hoursWorked = ((timeOut - timeIn) / 100)
+    return hoursWorked
+}
+
+function wagesEarnedOnDate(date) {
+    const wagesEarned = (hoursWorkedOnDate.call(this, date) * this.payPerHout)
+    return wagesEarned
+}
+
 let allWagesFor = function () {
     let eligibleDates = this.timeInEvents.map(function (e) {
         return e.date
