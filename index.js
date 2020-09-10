@@ -17,21 +17,22 @@ function createEmployeeRecords(arrayz){
 }
 
 function createTimeInEvent(dateStamp){
-    this.timeInEvents.push( {type: 'TimeIn', date: dateStamp.slice(0, 10), hour: parseInt(dateStamp.slice(-5))})
+    this.timeInEvents.push( {type: 'TimeIn', date: dateStamp.split(' ')[0], hour: parseInt(dateStamp.split(' ')[1], 10)})
     return this
 }
 
 function createTimeOutEvent(dateStamp){
-    this.timeOutEvents.push({type: "TimeOut", date: dateStamp.slice(0, 10), hour: parseInt(dateStamp.slice(-5))})
+    this.timeOutEvents.push({type: "TimeOut", date: dateStamp.split(' ')[0], hour: parseInt(dateStamp.split(' ')[1], 10)})
     return this
 }
 
-function hoursWorkedOnDate(record, date){
-    let starting = record.timeInEvents.find(e => return e.date == date)
-    let ending = record.timeOutEvents.find(e => return e.date == date)
+function hoursWorkedOnDate(date){
+    let starting = this.timeInEvents.find(function(e){
+        return e.date === date})
+    let ending = this.timeOutEvents.find(function(e){
+        return e.date === date})
     let hours = (ending.hour - starting.hour) / 100
-    return hours 
-
+    return hours
 }
 
 /*
@@ -62,6 +63,17 @@ function calculatePayroll(records){
     return sum
 }
 
-function findEmployeeByFirstName(firstName){
-    return self.find(record => record.firstName === firstName)
+function findEmployeeByFirstName(collection){
+    collection.find(record => record.firstName === this.familyName)
 }
+
+
+function wagesEarnedOnDate(date){
+    return hoursWorkedOnDate(date) * this.payPerHour
+}
+
+
+// cRecord = createEmployeeRecord(["Julius", "Caesar", "General", 27])
+//         createTimeInEvent.call(cRecord, "44-03-15 0900")
+//         createTimeOutEvent.call(cRecord, "44-03-15 1100")
+//         wagesEarnedOnDate.call(cRecord, "44-03-15")
