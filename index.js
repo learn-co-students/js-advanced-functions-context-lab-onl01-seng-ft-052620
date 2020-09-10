@@ -58,22 +58,22 @@ let allWagesFor = function () {
 
 
 function calculatePayroll(records){
-    let sum = 0
-    records.map(record => sum += allWagesFor(record))
-    return sum
+    return records.reduce((start, record) => start += allWagesFor.call(record), 0)
 }
 
-function findEmployeeByFirstName(collection){
-    collection.find(record => record.firstName === this.familyName)
+function findEmployeeByFirstName(collection, name){
+    return collection.find(record => record.firstName === name)
 }
 
 
 function wagesEarnedOnDate(date){
-    return hoursWorkedOnDate(date) * this.payPerHour
+    return hoursWorkedOnDate.call(this, date) * this.payPerHour
 }
 
 
-// cRecord = createEmployeeRecord(["Julius", "Caesar", "General", 27])
-//         createTimeInEvent.call(cRecord, "44-03-15 0900")
-//         createTimeOutEvent.call(cRecord, "44-03-15 1100")
-//         wagesEarnedOnDate.call(cRecord, "44-03-15")
+// let src = [
+//     ["Loki", "Laufeysson-Odinsson", "HR Representative", 35],
+//     ["Natalia", "Romanov", "CEO", 150]
+//   ]
+//   let emps = createEmployeeRecords(src)
+//   let loki = findEmployeeByFirstName(emps, "Loki")
