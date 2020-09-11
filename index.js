@@ -27,8 +27,7 @@ function createTimeOutEvent(dateStamp){
 }
 
 function hoursWorkedOnDate(date){
-    let starting = this.timeInEvents.find(function(e){
-        return e.date === date})
+    let starting = this.timeInEvents.find(e => e.date === date)
     let ending = this.timeOutEvents.find(function(e){
         return e.date === date})
     let hours = (ending.hour - starting.hour) / 100
